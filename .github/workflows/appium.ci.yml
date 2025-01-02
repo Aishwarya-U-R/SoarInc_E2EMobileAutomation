@@ -25,16 +25,22 @@ jobs:
           sudo apt update
           sudo apt install -y openjdk-11-jdk wget unzip
 
-          # Download and install Android command line tools
-          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-          unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android
-          sudo mv $HOME/Android/cmdline-tools $ANDROID_HOME/cmdline-tools
+          # Download Android Command Line Tools
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip -O commandlinetools-linux.zip
+          unzip commandlinetools-linux.zip -d $HOME/Android
 
-          # Set up Android environment variables
-          export ANDROID_HOME=$HOME/Android/Sdk
-          export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+          # Move cmdline-tools to the correct directory
+          mkdir -p $HOME/Android/cmdline-tools
+          mv $HOME/Android/cmdline-tools-linux/* $HOME/Android/cmdline-tools/
 
-          # Install Android SDK packages
+          # Set up the environment variables
+          echo "ANDROID_HOME=$HOME/Android" >> $GITHUB_ENV
+          echo "PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH" >> $GITHUB_ENV
+
+          # Reload shell environment to apply the variables
+          source $GITHUB_ENV
+
+          # Install SDK packages and accept licenses
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-33" "system-images;android-33;google_apis;x86_64" "build-tools;33.0.0"
           sdkmanager --update
