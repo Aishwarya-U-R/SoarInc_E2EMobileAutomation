@@ -2,8 +2,7 @@ name: Run WebDriverIO Tests with Appium
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: main
   workflow_dispatch: # Enables manual trigger
 
 jobs:
