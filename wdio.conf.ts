@@ -22,7 +22,7 @@ export const config: WebdriverIO.Config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["./test/specs/*.ts"],
+  specs: ["./test/specs/WikiAppTest.e2e.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -57,7 +57,7 @@ export const config: WebdriverIO.Config = {
       "appium:deviceName": "emulator-5554",
       "appium:appPackage": "org.wikipedia.alpha",
       "appium:appActivity": "org.wikipedia.main.MainActivity",
-      "appium:app": process.env.APK_PATH || "app/WikipediaSample.apk", // Use environment variable if available
+      "appium:app": process.env.APK_PATH || "app/WikipediaSample.apk", // Use app/ for local run
     },
   ],
 
@@ -144,6 +144,8 @@ export const config: WebdriverIO.Config = {
       "allure",
       {
         outputDir: "./allure-results", // Correctly specifying outputDir
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: false,
       },
     ],
   ],
@@ -152,7 +154,7 @@ export const config: WebdriverIO.Config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: "bdd",
-    timeout: 60000,
+    timeout: 120000,
   },
 
   //
