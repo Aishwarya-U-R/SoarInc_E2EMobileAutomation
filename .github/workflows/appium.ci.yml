@@ -19,32 +19,41 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          sdk-version: "30.0.3"
-          ndk-version: "21.3.6528147"
-
-      - name: Install Android Emulator Dependencies
+      - name: Install Android SDK Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lib32z1 lib32ncurses6 lib32stdc++6
+          # Install Android SDK
+          sudo apt update
+          sudo apt install -y openjdk-11-jdk wget unzip
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+          unzip commandlinetools-linux-7583922_latest.zip
+          sudo mv cmdline-tools $ANDROID_HOME/cmdline-tools
+          export ANDROID_HOME=$HOME/Android/Sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
+          export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+          # Install Android SDK packages
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-33" "system-images;android-33;google_apis;x86_64" "build-tools;33.0.0"
+          sdkmanager --update
+
+      - name: Set up Android Emulator
+        run: |
+          # Create AVD (if it doesn't exist)
+          echo "Creating Android Emulator..."
+          echo no | avdmanager create avd -n Pixel_4_API_33 -k "system-images;android-33;google_apis;x86_64" --force
 
       - name: Start Android Emulator
         run: |
-          echo "Starting the Android Emulator"
-          # Start the emulator in the background
-          nohup $ANDROID_HOME/emulator/emulator -avd Pixel_4_API_33 -no-window -no-audio -accel on &
-
-      - name: Wait for the Emulator to Boot
-        run: |
-          echo "Waiting for emulator to be ready..."
-          $ANDROID_HOME/platform-tools/adb wait-for-device
-          $ANDROID_HOME/platform-tools/adb shell input keyevent 82  # Unlock the emulator screen
+          echo "Starting the Android Emulator..."
+          nohup emulator -avd Pixel_4_API_33 -no-window -gpu off &
+          adb wait-for-device
+          adb devices
+          sleep 30 # Wait for emulator to fully start
 
       - name: Install Dependencies
         run: |
           npm ci # Install dependencies defined in package-lock.json
+          npm install --save-dev appium wdio-appium-service allure-commandline
 
       - name: Download APK from GitHub Release
         run: |
