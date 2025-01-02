@@ -1,0 +1,72 @@
+name: Run WebDriverIO Tests with Appium
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Enables manual trigger
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-version: '30.0.3'
+          ndk-version: '21.3.6528147'
+        
+      - name: Install Android Emulator Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lib32z1 lib32ncurses6 lib32stdc++6
+
+      - name: Start Android Emulator
+        run: |
+          echo "Starting the Android Emulator"
+          # Start the emulator in the background
+          nohup $ANDROID_HOME/emulator/emulator -avd Pixel_4_API_33 -no-window -no-audio -accel on &
+
+      - name: Wait for the Emulator to Boot
+        run: |
+          echo "Waiting for emulator to be ready..."
+          $ANDROID_HOME/platform-tools/adb wait-for-device
+          $ANDROID_HOME/platform-tools/adb shell input keyevent 82  # Unlock the emulator screen
+
+      - name: Install Dependencies
+        run: |
+          npm ci # Install dependencies defined in package-lock.json
+
+      - name: Download APK from GitHub Release
+        run: |
+          curl -L -o WikipediaSample.apk https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/WikipediaSample.apk
+      
+      - name: Set APK_PATH environment variable
+        run: echo "APK_PATH=/tmp/WikipediaSample.apk" >> $GITHUB_ENV
+      
+      - name: Start Appium Server
+        run: |
+          nohup npx appium &
+
+      - name: Run WebDriverIO Tests
+        run: |
+          npx wdio run wdio.conf.ts
+
+      - name: Generate Allure Report
+        run: |
+          allure generate ./allure-results --clean -o ./allure-report
+      
+       - name: Upload Allure HTML Report as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-html-report
+          path: ./allure-report  # Path where the HTML report is generated
