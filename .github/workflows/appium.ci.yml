@@ -1,8 +1,5 @@
 name: Run WebDriverIO Tests with Appium
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches: [main]
   workflow_dispatch: # Enables manual trigger
@@ -23,40 +20,7 @@ jobs:
         run: |
           # Install required dependencies
           sudo apt update
-          sudo apt install -y openjdk-11-jdk wget unzip
-
-          # Download Android Command Line Tools
-          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip -O commandlinetools-linux.zip
-          unzip commandlinetools-linux.zip -d $HOME/Android
-
-          # Check extracted contents for debugging
-          echo "Checking extracted contents..."
-          ls -l $HOME/Android
-
-          # Check if the cmdline-tools-linux directory is present
-          if [ -d "$HOME/Android/cmdline-tools-linux" ]; then
-            echo "cmdline-tools-linux folder exists"
-          else
-            echo "cmdline-tools-linux folder does not exist"
-          fi
-
-          # Create cmdline-tools directory
-          mkdir -p $HOME/Android/cmdline-tools
-
-          # Move extracted files to the correct location
-          mv $HOME/Android/cmdline-tools-linux/* $HOME/Android/cmdline-tools/
-
-          # Set up the environment variables
-          echo "ANDROID_HOME=$HOME/Android" >> $GITHUB_ENV
-          echo "PATH=$ANDROID_HOME/cmdline-tools/cmdline-tools/bin:$ANDROID_HOME/platform-tools:$PATH" >> $GITHUB_ENV
-
-          # Reload shell environment to apply the variables
-          source $GITHUB_ENV
-
-          # Install SDK packages and accept licenses
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-33" "system-images;android-33;google_apis;x86_64" "build-tools;33.0.0"
-          sdkmanager --update
+          manager --update
 
       - name: Set up Android Emulator
         run: |
