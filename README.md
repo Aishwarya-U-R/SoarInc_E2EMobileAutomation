@@ -2,9 +2,11 @@
 
 Start Appium -> `appium`
 
-Find list of devices, -> `adb devices`
+Find list of devices -> `emulator -list-avds`
 
 Start emulator -> `emulator -avd <your_avd_name>`
+
+Start emulator without UI -> `emulator -avd Pixel_4_API_33 -no-window -gpu off`
 
 Run tests -> `npx wdio run wdio.conf.ts`
 
