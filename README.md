@@ -14,7 +14,7 @@ Generate allure report -> `allure generate allure-results --clean -o allure-repo
 
 Launch allure broswr -> `allure open allure-report`
 
-Single file report using the -> $ allure generate --single-file allure-results --clean
+Single file report using the -> `allure generate --single-file allure-results --clean`
 
 Mobile tests results:
 1. [App Navigation: Scroll, Interact, and Return Home](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test1-Scroll.mov)
