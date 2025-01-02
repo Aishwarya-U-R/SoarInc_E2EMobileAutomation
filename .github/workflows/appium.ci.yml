@@ -1,6 +1,6 @@
 name: Run WebDriverIO Tests with Appium
 on:
-   push:
+  push:
     branches:
       - main
   pull_request:
