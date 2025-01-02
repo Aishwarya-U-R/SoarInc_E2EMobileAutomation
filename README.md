@@ -7,5 +7,6 @@ Generate allure report -> `allure generate allure-results --clean -o allure-repo
 Launch allure broswr -> `allure open allure-report`
 
 Mobile tests results:
-1. [App Navigation: Scroll, Interact, and Return Home](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/ScrollTest.mov)
-2. [Verify Search Functionality and Navigate back to Home page](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/SearchTest.mov)
+1. [App Navigation: Scroll, Interact, and Return Home](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test1-Scroll.mov)
+2. [Verify Search Functionality and Navigate back to Home page]()
+3. [Disable all options from Settings menu]()
