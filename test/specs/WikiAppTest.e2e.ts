@@ -5,6 +5,7 @@ describe("WikiApp tests", () => {
   it("1. App Navigation: Scroll, Interact, and Return Home", async () => {
     await wiki.clickAppOlderVersionAlertOk();
     await wiki.homePageInNews.waitForDisplayed();
+    // await browser.saveScreenshot("./screenshots/app-launch.png");//trail
     await wiki.scrollUntilCertainDateDisplayed(); //Scroll to end
     await wiki.clickIcon(wiki.myListsIcon);
     await wiki.clickIcon(wiki.historyIcon);
