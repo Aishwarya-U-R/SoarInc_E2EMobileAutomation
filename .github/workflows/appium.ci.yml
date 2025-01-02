@@ -21,6 +21,26 @@ jobs:
 
       - name: Install Android SDK Dependencies
         run: |
+          # Install required dependencies
+          sudo apt update
+          sudo apt install -y openjdk-11-jdk wget unzip
+
+          # Download and install Android command line tools
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+          unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android
+          sudo mv $HOME/Android/cmdline-tools $ANDROID_HOME/cmdline-tools
+
+          # Set up Android environment variables
+          export ANDROID_HOME=$HOME/Android/Sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+
+          # Install Android SDK packages
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-33" "system-images;android-33;google_apis;x86_64" "build-tools;33.0.0"
+          sdkmanager --update
+
+      - name: Install Android SDK Dependencies
+        run: |
           # Install Android SDK
           sudo apt update
           sudo apt install -y openjdk-11-jdk wget unzip
