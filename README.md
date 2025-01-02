@@ -1,4 +1,4 @@
-# SoarInc_E2EMobileAutomation
+# 3. SoarInc_E2EMobileAutomation
 
 Start Appium -> `appium`
 http://127.0.0.1:4723/status - in broswer will return {"value":{"ready":true,"message":"The server is ready to accept new connections","build":{"version":"2.13.1"}}}
