@@ -30,6 +30,7 @@ Package: adb shell pm list packages | grep wiki
 Launch app in emulator & run : adb shell dumpsys window | grep -E 'mCurrentFocus'
 
 Capabilities used in Appium Inspector:
+
 `{
   "platformName": "android",
   "appium:deviceName": "emulator-5554",
