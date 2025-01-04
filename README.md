@@ -9,7 +9,7 @@ Mobile tests results: E2E Mobile Auomation framework used is - **`WebDriverIO wi
 **Other details:**
 
 Start Appium -> `appium`
-http://127.0.0.1:4723/status - in broswer will return {"value":{"ready":true,"message":"The server is ready to accept new connections","build":{"version":"2.13.1"}}}
+http://127.0.0.1:4723/status - {"value":{"ready":true,"message":"The server is ready to accept new connections","build":{"version":"2.13.1"}}}
 
 Find list of devices -> `emulator -list-avds`
 
