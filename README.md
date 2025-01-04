@@ -1,6 +1,6 @@
 # 3. SoarInc_E2EMobileAutomation
 
-E2E Mobile Auomation framework used is - **`WebDriverIO with Appium`**
+E2E Mobile Auomation framework used is - **`WebDriverIO with Appium`** and E2E Mobile tests are present inside [tests folder](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/tree/main/tests)
 
 **Mobile tests results:**
 
