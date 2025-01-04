@@ -1,5 +1,15 @@
 # 3. SoarInc_E2EMobileAutomation
 
+
+Mobile tests results: E2E Mobile Auomation framework used is - `WebDriverIO with Appium`
+
+1. [App Navigation: Scroll, Interact, and Return Home](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test1-Scroll.mov)
+2. [Verify Search Functionality and Navigate back to Home page](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test2-Search.mov)
+3. [Disable all options from Settings menu](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test3-DisableOptions.mov)
+
+Other details:
+
+
 Start Appium -> `appium`
 http://127.0.0.1:4723/status - in broswer will return {"value":{"ready":true,"message":"The server is ready to accept new connections","build":{"version":"2.13.1"}}}
 
@@ -16,13 +26,6 @@ Generate allure report -> `allure generate allure-results --clean -o allure-repo
 Launch allure broswr -> `allure open allure-report`
 
 Single file report using the -> `allure generate --single-file allure-results --clean`
-
-Mobile tests results: E2E Mobile Auomation framework used is - `WebDriverIO with Appium`
-
-1. [App Navigation: Scroll, Interact, and Return Home](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test1-Scroll.mov)
-2. [Verify Search Functionality and Navigate back to Home page](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test2-Search.mov)
-3. [Disable all options from Settings menu](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test3-DisableOptions.mov)
-
 
 Android version: adb shell getprop ro.build.version.release
 Device name : adb devices
