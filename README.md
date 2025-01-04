@@ -6,7 +6,7 @@ Mobile tests results: E2E Mobile Auomation framework used is - **`WebDriverIO wi
 2. [Verify Search Functionality and Navigate back to Home page](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test2-Search.mov)
 3. [Disable all options from Settings menu](https://github.com/Aishwarya-U-R/SoarInc_E2EMobileAutomation/releases/download/v1.0/Test3-DisableOptions.mov)
 
-**Other details:**
+**Other details for Local run:**
 
 Start Appium -> `appium`
 http://127.0.0.1:4723/status - {"value":{"ready":true,"message":"The server is ready to accept new connections","build":{"version":"2.13.1"}}}
